@@ -1,2 +1,8 @@
 .idea
 .env
+MAIN_APP/__pycache__/settings.cpython-38.pyc
+api/__pycache__/v1_urls.cpython-38.pyc
+configs/__pycache__/jwt_config.cpython-38.pyc
+configs/__pycache__/rest_config.cpython-38.pyc
+apps/notes/__pycache__/
+apps/notes/migrations/__pycache__/

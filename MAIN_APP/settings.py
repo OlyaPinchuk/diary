@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     'apps.users',
     'apps.auth_',
     'apps.user_profile',
-    # 'apps.notes',
+    'apps.notes',
 ]
 
 MIDDLEWARE = [
