@@ -10,6 +10,5 @@ class NoteModel(models.Model):
 
     title = models.CharField(max_length=100)
     content = models.CharField(max_length=500)
-    # user = models.ManyToOneRel(UserModel, related_name='note')
-
+    user = models.ForeignKey(to=UserModel, on_delete=models.CASCADE)
 

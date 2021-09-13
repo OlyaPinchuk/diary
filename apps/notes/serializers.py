@@ -8,6 +8,6 @@ UserModel = get_user_model()
 class NoteSerializer(ModelSerializer):
     class Meta:
         model = NoteModel
-        fields = ('id', 'title', 'content')
+        fields = ('id', 'title', 'content', 'user')
 
 
