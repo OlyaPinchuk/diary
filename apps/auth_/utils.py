@@ -16,5 +16,5 @@ class Utils:
 
     @staticmethod
     def create_email_token(user):
-        return EmailToken().for_user(user).access.token
+        return EmailToken().for_user(user).access_token
 

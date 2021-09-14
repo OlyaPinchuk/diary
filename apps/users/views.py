@@ -2,6 +2,7 @@ from rest_framework import status
 from rest_framework.generics import ListAPIView, GenericAPIView, UpdateAPIView, get_object_or_404
 from django.contrib.auth import get_user_model
 from rest_framework.response import Response
+from rest_framework.views import APIView
 
 from .permissions import IsSuperUser
 from .serializers import UserDetailSerializer, ProfileDetailSerializer
@@ -14,6 +15,15 @@ class UserListView(ListAPIView):
     # permission_classes = [IsAdminUser]
     queryset = UserModel.objects.all()
     serializer_class = UserDetailSerializer
+
+
+class ChosenUserListView(APIView):
+
+    def get(self, *args, **kwargs):
+        pk = kwargs.get('pk')
+        user = get_object_or_404(UserModel.objects.all(), pk=pk)
+        data = UserDetailSerializer(user).data
+        return Response(data, status.HTTP_200_OK)
 
 
 class UserUpToAdminView(GenericAPIView):
