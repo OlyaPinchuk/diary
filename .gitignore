@@ -11,5 +11,8 @@ apps/notes/migrations/0002_notemodel_user.py
 apps/user_profile/migrations/0001_initial.py
 apps/user_profile/migrations/0002_profilemodel_user.py
 apps/users/migrations/0001_initial.py
+apps/lists/__init__.py
+apps/lists/__pycache__/
+
 
 

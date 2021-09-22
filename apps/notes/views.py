@@ -28,3 +28,13 @@ class UserNotes(APIView):
         # db_notes = get_object_or_404(NoteModel.objects.all(), user_id=pk) # does not work
         notes = NoteSerializer(db_notes, many=True).data
         return Response(notes, status.HTTP_200_OK)
+
+
+class ChosenNote(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, *args, **kwargs):
+        id = kwargs.get('id')
+        note = get_object_or_404(NoteModel.objects.all(), pk=id)
+        data = NoteSerializer(note).data
+        return Response(data, status.HTTP_200_OK)

@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'apps.auth_',
     'apps.user_profile',
     'apps.notes',
+    'apps.lists'
 ]
 
 MIDDLEWARE = [

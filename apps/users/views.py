@@ -17,7 +17,7 @@ class UserListView(ListAPIView):
     serializer_class = UserDetailSerializer
 
 
-class ChosenUserListView(APIView):
+class ChosenUserView(APIView):
 
     def get(self, *args, **kwargs):
         # TODO: pdb example
