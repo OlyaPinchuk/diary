@@ -13,6 +13,7 @@ apps/user_profile/migrations/0002_profilemodel_user.py
 apps/users/migrations/0001_initial.py
 apps/lists/__init__.py
 apps/lists/__pycache__/
+apps/lists/migrations/0001_initial.py
 
 
 
