@@ -26,7 +26,7 @@ class ListSerializer(ModelSerializer):
 
     class Meta:
         model = ListModel
-        fields = ('id', 'title', 'items')
+        fields = ('id', 'title', 'user', 'items')
 
     def create(self, validated_data):
         items_data = validated_data.pop('items')

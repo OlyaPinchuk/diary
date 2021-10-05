@@ -25,6 +25,7 @@ class ListModel(models.Model):
         db_table = 'list'
 
     title = models.CharField(max_length=100)
+    user = models.ForeignKey(to=UserModel, on_delete=models.CASCADE)
 
 
 class ListItemModel(models.Model):

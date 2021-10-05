@@ -34,3 +34,12 @@ class CreateListView(APIView):
         serializer.is_valid()
         serializer.save()
         return Response(serializer.data, status.HTTP_200_OK)
+
+
+class UserListsView(APIView):
+
+    def get(self, *args, **kwargs):
+        pk = kwargs.get('pk')
+        db_lists = ListModel.objects.filter(user_id=pk)
+        lists = ListSerializer(db_lists, many=True).data
+        return Response(lists, status.HTTP_200_OK)
