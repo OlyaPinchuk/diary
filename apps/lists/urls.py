@@ -1,12 +1,13 @@
 from django.urls import path
 
 # from .views import ListCreate, ListListView,
-from .views import GetListView, CreateListView
+from .views import GetListView, CreateListView, ChosenListView
 
 urlpatterns = [
     # path('', ListListView.as_view()),
     # path('/add', ListCreate.as_view()),
     path('', GetListView.as_view()),
-    path('/add', CreateListView.as_view())
+    path('/add', CreateListView.as_view()),
+    path('/<int:id>', ChosenListView.as_view())
 
 ]

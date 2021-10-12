@@ -38,3 +38,11 @@ class ChosenNote(APIView):
         note = get_object_or_404(NoteModel.objects.all(), pk=id)
         data = NoteSerializer(note).data
         return Response(data, status.HTTP_200_OK)
+
+    def put(self, *args, **kwargs):
+        id = kwargs.get('id')
+        note = get_object_or_404(NoteModel.objects.all(), pk=id)
+        serializer = NoteSerializer(note, self.request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data, status.HTTP_200_OK)

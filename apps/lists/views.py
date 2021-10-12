@@ -43,3 +43,32 @@ class UserListsView(APIView):
         db_lists = ListModel.objects.filter(user_id=pk)
         lists = ListSerializer(db_lists, many=True).data
         return Response(lists, status.HTTP_200_OK)
+
+
+class ChosenListView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, *args, **kwargs):
+        id = kwargs.get('id')
+        list = get_object_or_404(ListModel.objects.all(), pk=id)
+        data = ListSerializer(list).data
+        return Response(data, status.HTTP_200_OK)
+
+
+class UserChosenList(APIView):
+
+    def get(self, *args, **kwargs):
+        user_id = kwargs.get('pk')
+        list_id = kwargs.get('id')
+        db_lists = ListModel.objects.filter(user_id=user_id)
+        chosen_list = 0
+        for l in db_lists:
+            print(l)
+            if l.id == list_id:
+                chosen_list = l
+        data = ListSerializer(chosen_list).data
+        return Response(data, status.HTTP_200_OK)
+
+
+
+
