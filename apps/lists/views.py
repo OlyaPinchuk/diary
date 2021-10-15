@@ -54,6 +54,17 @@ class ChosenListView(APIView):
         data = ListSerializer(list).data
         return Response(data, status.HTTP_200_OK)
 
+    def put(self, *args, **kwargs):
+        id = kwargs.get('id')
+        list = get_object_or_404(ListModel.objects.all(), pk=id)
+        serializer = ListSerializer(list, self.request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data, status.HTTP_200_OK)
+
+    # def update(self, *args, **kwargs):
+
+
 
 class UserChosenList(APIView):
 

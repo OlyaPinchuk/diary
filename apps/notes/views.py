@@ -46,3 +46,10 @@ class ChosenNote(APIView):
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response(serializer.data, status.HTTP_200_OK)
+
+    def delete(self, *args, **kwargs):
+        id = kwargs.get('id')
+        note = get_object_or_404(NoteModel.objects.all(), pk=id)
+        note.delete()
+        return Response(status.HTTP_204_NO_CONTENT)
+
