@@ -4,22 +4,6 @@ from django.contrib.auth import get_user_model
 UserModel = get_user_model()
 
 
-# class ListModel(models.Model):
-#     class Meta:
-#         db_table = 'list'
-#
-#     title = models.CharField(max_length=100)
-#
-#
-# class ListItemModel(models.Model):
-#     class Meta:
-#         db_table = 'list_item'
-#
-#     content = models.CharField(max_length=100)
-#     status = models.BooleanField(primary_key=False)
-#     list = models.ForeignKey(to=ListModel, on_delete=models.CASCADE)
-
-
 class ListModel(models.Model):
     class Meta:
         db_table = 'list'
@@ -34,5 +18,6 @@ class ListItemModel(models.Model):
 
     list = models.ForeignKey(ListModel, related_name='items', on_delete=models.CASCADE)
     content = models.CharField(max_length=100)
+    status = models.BooleanField(default=False)
 
 

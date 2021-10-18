@@ -4,23 +4,12 @@ from django.contrib.auth import get_user_model
 from .models import ListModel, ListItemModel
 
 
-# class ListSerializer(ModelSerializer):
-#     class Meta:
-#         model = ListModel
-#         fields = ('id', 'title')
-#
-#
-# class ListItemSerializer(ModelSerializer):
-#     class Meta:
-#         model = ListItemModel
-#         fields = ('id', 'content', 'list')
-
-
 class ItemSerializer(ModelSerializer):
     id = serializers.IntegerField(read_only=False, required=False)
+
     class Meta:
         model = ListItemModel
-        fields = ('id', 'content')
+        fields = ('id', 'content', 'status')
 
 
 class ListSerializer(ModelSerializer):

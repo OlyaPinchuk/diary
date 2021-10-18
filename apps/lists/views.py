@@ -8,16 +8,6 @@ from .serializers import ListSerializer
 from .models import ListModel
 
 
-# class ListCreate(CreateAPIView):
-#     serializer_class = ListSerializer
-#
-#
-# class ListListView(ListAPIView):
-#     queryset = ListModel.objects.all()
-#     serializer_class = ListSerializer
-#     # permission_classes = [IsAuthenticated]
-
-
 class GetListView(APIView):
 
     def get(self, *args, **kwargs):
@@ -62,8 +52,11 @@ class ChosenListView(APIView):
         serializer.save()
         return Response(serializer.data, status.HTTP_200_OK)
 
-    # def update(self, *args, **kwargs):
-
+    def delete(self, *args, **kwargs):
+        list_id = kwargs.get('id')
+        list = get_object_or_404(ListModel.objects.all(), pk=list_id)
+        list.delete()
+        return Response(status.HTTP_204_NO_CONTENT)
 
 
 class UserChosenList(APIView):
@@ -74,11 +67,15 @@ class UserChosenList(APIView):
         db_lists = ListModel.objects.filter(user_id=user_id)
         chosen_list = 0
         for l in db_lists:
-            print(l)
             if l.id == list_id:
                 chosen_list = l
         data = ListSerializer(chosen_list).data
         return Response(data, status.HTTP_200_OK)
+
+
+
+
+
 
 
 
