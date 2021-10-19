@@ -18,6 +18,6 @@ class ListItemModel(models.Model):
 
     list = models.ForeignKey(ListModel, related_name='items', on_delete=models.CASCADE)
     content = models.CharField(max_length=100)
-    status = models.BooleanField(default=False)
+    status = models.BooleanField()
 
 

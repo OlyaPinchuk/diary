@@ -32,7 +32,7 @@ class ListSerializer(ModelSerializer):
         for item_data in items_data:
             obj, created = ListItemModel.objects.update_or_create(
                 id=item_data.get('id'),
-                defaults={"content": item_data.get('content'), "list_id": instance.id}
+                defaults={"content": item_data.get('content'), 'status': item_data.get('status'), "list_id": instance.id}
             )
         instance.title = validated_data.get('title', instance.title)
         instance.user = validated_data.get('user', instance.user)
