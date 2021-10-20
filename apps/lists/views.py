@@ -4,8 +4,8 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 
-from .serializers import ListSerializer
-from .models import ListModel
+from .serializers import ListSerializer, ItemSerializer
+from .models import ListModel, ListItemModel
 
 
 class GetListView(APIView):
@@ -71,6 +71,23 @@ class UserChosenList(APIView):
                 chosen_list = l
         data = ListSerializer(chosen_list).data
         return Response(data, status.HTTP_200_OK)
+
+
+class ListItemView(APIView):
+
+    def put(self, *args, **kwargs):
+        item_id = kwargs.get('itemId')
+        item = get_object_or_404(ListItemModel.objects.all(), pk=item_id)
+        serializer = ItemSerializer(item, self.request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data, status.HTTP_200_OK)
+
+    def delete(self, *args, **kwargs):
+        item_id = kwargs.get('itemId')
+        db_item = ListItemModel.objects.filter(pk=item_id)
+        db_item.delete()
+        return Response(status.HTTP_204_NO_CONTENT)
 
 
 
