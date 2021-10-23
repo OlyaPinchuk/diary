@@ -17,7 +17,7 @@ class ListItemModel(models.Model):
         db_table = 'list_item'
 
     list = models.ForeignKey(ListModel, related_name='items', on_delete=models.CASCADE)
-    content = models.CharField(max_length=100)
+    content = models.CharField(max_length=100, blank=True, null=False)
     status = models.BooleanField()
 
 
