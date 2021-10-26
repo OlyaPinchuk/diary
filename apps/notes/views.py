@@ -19,15 +19,30 @@ class NoteListView(ListAPIView):
     permission_classes = [IsAuthenticated]
 
 
+
 class UserNotes(APIView):
     permission_classes = [IsAuthenticated]
 
-    def get(self, *args, **kwargs):
+    # def get(self, *args, **kwargs):
+    #     pk = kwargs.get('pk')
+    #     db_notes = NoteModel.objects.filter(user_id=pk)
+    #     # db_notes = get_object_or_404(NoteModel.objects.all(), user_id=pk) # does not work
+    #     notes = NoteSerializer(db_notes, many=True).data
+    #     return Response(dict(notes='notes'), status.HTTP_200_OK)
+
+    def get(self, request, *args, **kwargs):
         pk = kwargs.get('pk')
-        db_notes = NoteModel.objects.filter(user_id=pk)
-        # db_notes = get_object_or_404(NoteModel.objects.all(), user_id=pk) # does not work
+        page = int(request.GET.get('pageIndex'))
+        step = 5
+        db_notes = NoteModel.objects.filter(user_id=pk)[step*page:step*page+step]
+        # db_notes = NoteModel.objects.filter(user_id=pk)[1:5]
         notes = NoteSerializer(db_notes, many=True).data
-        return Response(notes, status.HTTP_200_OK)
+        number = NoteModel.objects.filter(user_id=pk).count()
+        response = {
+            "number": number,
+            "notes": notes
+        }
+        return Response(response, status.HTTP_200_OK)
 
 
 class ChosenNote(APIView):
@@ -53,3 +68,28 @@ class ChosenNote(APIView):
         note.delete()
         return Response(status.HTTP_204_NO_CONTENT)
 
+
+class FoundNotesListView(APIView):
+
+    def get(self, request, *args, **kwargs):
+        found_notes = []
+        search_text = request.GET.get('searchText')
+        user_id = request.GET.get('userId')
+        print(search_text)
+        db_notes = NoteModel.objects.filter(user_id=user_id)
+        notes = NoteSerializer(db_notes, many=True).data
+        for n in notes:
+            if search_text in n['title']:
+                found_notes.append(n)
+                print('found', n['title'])
+        return Response(found_notes, status.HTTP_200_OK)
+
+
+class UserNotesPaginatedListView(APIView):
+
+    def get(self, *args, **kwargs):
+        pk = kwargs.get('pk')
+        db_notes = NoteModel.objects.filter(user_id=pk)
+        # db_notes = get_object_or_404(NoteModel.objects.all(), user_id=pk) # does not work
+        notes = NoteSerializer(db_notes, many=True).data
+        return Response(notes, status.HTTP_200_OK)

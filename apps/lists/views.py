@@ -21,10 +21,10 @@ class CreateListView(APIView):
     def post(self, *args, **kwargs):
         data = self.request.data
         serializer = ListSerializer(data=data)
-        serializer.is_valid()
-        serializer.save()
-        return Response(serializer.data, status.HTTP_200_OK)
-
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status.HTTP_200_OK)
+        return Response(serializer.errors, status.HTTP_400_BAD_REQUEST)
 
 class UserListsView(APIView):
 
