@@ -73,16 +73,23 @@ class FoundNotesListView(APIView):
 
     def get(self, request, *args, **kwargs):
         found_notes = []
+        page = int(request.GET.get('pageIndex'))
+        step = 5
         search_text = request.GET.get('searchText')
         user_id = request.GET.get('userId')
-        print(search_text)
         db_notes = NoteModel.objects.filter(user_id=user_id)
         notes = NoteSerializer(db_notes, many=True).data
         for n in notes:
             if search_text in n['title']:
                 found_notes.append(n)
                 print('found', n['title'])
-        return Response(found_notes, status.HTTP_200_OK)
+        number = len(found_notes)
+        found_notes = found_notes[step*page:step*(page+1)]
+        response = {
+            "number": number,
+            "notes": found_notes
+        }
+        return Response(response, status.HTTP_200_OK)
 
 
 class UserNotesPaginatedListView(APIView):

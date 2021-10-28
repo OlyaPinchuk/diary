@@ -90,9 +90,26 @@ class ListItemView(APIView):
         return Response(status.HTTP_204_NO_CONTENT)
 
 
+class FoundListsListView(APIView):
 
-
-
+    def get(self, request, *args, **kwargs):
+        found_lists = []
+        page = int(request.GET.get('pageIndex'))
+        step = 5
+        search_text = request.GET.get('searchText').lower()
+        user_id = request.GET.get('userId')
+        db_lists = ListModel.objects.filter(user_id=user_id)
+        lists = ListSerializer(db_lists, many=True).data
+        for l in lists:
+            if search_text in l['title'].lower():
+                found_lists.append(l)
+                print('found', l['title'])
+        number = len(found_lists)
+        response = {
+            "number": number,
+            "lists": found_lists
+        }
+        return Response(response, status.HTTP_200_OK)
 
 
 
