@@ -75,12 +75,12 @@ class FoundNotesListView(APIView):
         found_notes = []
         page = int(request.GET.get('pageIndex'))
         step = 5
-        search_text = request.GET.get('searchText')
+        search_text = request.GET.get('searchText').lower()
         user_id = request.GET.get('userId')
         db_notes = NoteModel.objects.filter(user_id=user_id)
         notes = NoteSerializer(db_notes, many=True).data
         for n in notes:
-            if search_text in n['title']:
+            if search_text in n['title'].lower():
                 found_notes.append(n)
                 print('found', n['title'])
         number = len(found_notes)

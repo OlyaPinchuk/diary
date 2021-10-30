@@ -26,13 +26,33 @@ class CreateListView(APIView):
             return Response(serializer.data, status.HTTP_200_OK)
         return Response(serializer.errors, status.HTTP_400_BAD_REQUEST)
 
+
 class UserListsView(APIView):
 
-    def get(self, *args, **kwargs):
+    # def get(self, *args, **kwargs):
+    #     pk = kwargs.get('pk')
+    #     db_lists = ListModel.objects.filter(user_id=pk)
+    #     lists = ListSerializer(db_lists, many=True).data
+    #     return Response(lists, status.HTTP_200_OK)
+
+    def get(self, request, *args, **kwargs):
+
+
         pk = kwargs.get('pk')
-        db_lists = ListModel.objects.filter(user_id=pk)
+
+
+
+
+        page = int(request.GET.get('pageIndex'))
+        step = 5
+        db_lists = ListModel.objects.filter(user_id=pk)[step*page:step*page+step]
         lists = ListSerializer(db_lists, many=True).data
-        return Response(lists, status.HTTP_200_OK)
+        number = ListModel.objects.filter(user_id=pk).count()
+        response = {
+            "number": number,
+            "lists": lists
+        }
+        return Response(response, status.HTTP_200_OK)
 
 
 class ChosenListView(APIView):
@@ -98,19 +118,70 @@ class FoundListsListView(APIView):
         step = 5
         search_text = request.GET.get('searchText').lower()
         user_id = request.GET.get('userId')
-        db_lists = ListModel.objects.filter(user_id=user_id)
-        lists = ListSerializer(db_lists, many=True).data
-        for l in lists:
-            if search_text in l['title'].lower():
-                found_lists.append(l)
-                print('found', l['title'])
-        number = len(found_lists)
-        response = {
-            "number": number,
-            "lists": found_lists
-        }
-        return Response(response, status.HTTP_200_OK)
+        if request.GET.get('sortOption'):
+            sort_option = int(request.GET.get('sortOption'))
+            print(sort_option)
+            db_lists = ListModel.objects.filter(user_id=user_id)
+            lists = ListSerializer(db_lists, many=True).data
+            for l in lists:
+                if search_text in l['title'].lower():
+                    found_lists.append(l)
+            number = len(found_lists)
+            if sort_option == 1:
+                print('if 1')
+                def sort_func(e):
+                    return len(e['items'])
+                found_lists.sort(reverse=True, key=sort_func)
+            elif sort_option == 0:
+                print('if 1')
+                def sort_func(e):
+                    return len(e['items'])
+                found_lists.sort(reverse=False, key=sort_func)
+
+            # found_lists = found_lists[step * page:step * (page + 1)]
+            response = {
+                "number": number,
+                "lists": found_lists[step * page:step * (page + 1)]
+            }
+            return Response(response, status.HTTP_200_OK)
+
+        else:
+            db_lists = ListModel.objects.filter(user_id=user_id)
+            lists = ListSerializer(db_lists, many=True).data
+            for l in lists:
+                if search_text in l['title'].lower():
+                    found_lists.append(l)
+                    print('found', l['title'])
+            number = len(found_lists)
+            found_lists = found_lists[step*page:step*(page+1)]
+            response = {
+                "number": number,
+                "lists": found_lists
+            }
+            return Response(response, status.HTTP_200_OK)
 
 
+class SortedListsListView(APIView):
+
+    def get(self, request, *args, **kwargs):
+        pk = request.GET.get('userId')
+        page = int(request.GET.get('pageIndex'))
+        step = 5
+
+        def sortFunc(e):
+            return len(e['items'])
+
+        if request.GET.get('sortOption'):
+            sort_option = int(request.GET.get('sortOption'))
+            if sort_option == 1:
+                db_lists = ListModel.objects.filter(user_id=pk)
+                lists = ListSerializer(db_lists, many=True).data
+                lists.sort(reverse=True, key=sortFunc)
+            elif sort_option == 0:
+                db_lists = ListModel.objects.filter(user_id=pk)
+                lists = ListSerializer(db_lists, many=True).data
+                lists.sort(reverse=False, key=sortFunc)
+
+        return Response(lists[step*page:step*(page+1)], status.HTTP_200_OK)
 
 
