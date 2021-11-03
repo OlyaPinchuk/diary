@@ -12,7 +12,7 @@ UserModel = get_user_model()
 
 
 class UserListView(ListAPIView):
-    # permission_classes = [IsAdminUser]
+    permission_classes = [IsAdminUser]
     queryset = UserModel.objects.all()
     serializer_class = UserDetailSerializer
 

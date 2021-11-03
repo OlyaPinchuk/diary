@@ -1,3 +1,5 @@
+from rest_framework import status
+from rest_framework.response import Response
 from rest_framework.serializers import ModelSerializer, CharField
 from django.contrib.auth import get_user_model
 from django.core.validators import RegexValidator
@@ -26,7 +28,7 @@ class RegisterSerializer(ModelSerializer):
             'body': f'http://localhost:4200/activate?token={token}',
             'to': [user.email]
         }
-        Utils.send_email(**data)
+        # Utils.send_email(**data)
         serializer = ProfileCreateSerializer(data=profile)
         serializer.is_valid(raise_exception=True)
         serializer.save(user=user)
