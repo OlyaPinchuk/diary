@@ -14,6 +14,8 @@ apps/users/migrations/0001_initial.py
 apps/lists/__init__.py
 apps/lists/__pycache__/
 apps/lists/migrations/0001_initial.py
+apps/lists/migrations/__pycache__/0002_initial.cpython-38.pyc
+apps/lists/migrations/0002_initial.py
 
 
 
