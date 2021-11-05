@@ -20,11 +20,6 @@ class UserListView(ListAPIView):
 class ChosenUserView(APIView):
 
     def get(self, *args, **kwargs):
-        # TODO: pdb example
-        # l - list where we are
-        # n - go to next line
-        # c - continue request
-        # import pdb; pdb.set_trace()
         pk = kwargs.get('pk')
         user = get_object_or_404(UserModel.objects.all(), pk=pk)
         data = UserDetailSerializer(user).data

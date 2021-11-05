@@ -28,7 +28,7 @@ class RegisterSerializer(ModelSerializer):
             'body': f'http://localhost:4200/activate?token={token}',
             'to': [user.email]
         }
-        # Utils.send_email(**data)
+        Utils.send_email(**data)
         serializer = ProfileCreateSerializer(data=profile)
         serializer.is_valid(raise_exception=True)
         serializer.save(user=user)
