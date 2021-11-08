@@ -4,7 +4,7 @@ from rest_framework.generics import CreateAPIView, GenericAPIView, get_object_or
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework_simplejwt.exceptions import TokenError
-from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework_simplejwt.tokens import RefreshToken, AccessToken
 
 from .serializers import RegisterSerializer
 from apps.users.serializers import UserDetailSerializer
