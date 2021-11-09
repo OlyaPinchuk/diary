@@ -19,7 +19,6 @@ class NoteListView(ListAPIView):
     permission_classes = [IsAdminUser]
 
 
-
 class UserNotes(APIView):
     permission_classes = [IsAuthenticated]
 

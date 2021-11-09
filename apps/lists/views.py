@@ -36,13 +36,7 @@ class UserListsView(APIView):
     #     return Response(lists, status.HTTP_200_OK)
 
     def get(self, request, *args, **kwargs):
-
-
         pk = kwargs.get('pk')
-
-
-
-
         page = int(request.GET.get('pageIndex'))
         step = 5
         db_lists = ListModel.objects.filter(user_id=pk)[step*page:step*page+step]
@@ -144,7 +138,6 @@ class FoundListsListView(APIView):
                 "lists": found_lists[step * page:step * (page + 1)]
             }
             return Response(response, status.HTTP_200_OK)
-
         else:
             db_lists = ListModel.objects.filter(user_id=user_id)
             lists = ListSerializer(db_lists, many=True).data
@@ -168,7 +161,7 @@ class SortedListsListView(APIView):
         page = int(request.GET.get('pageIndex'))
         step = 5
 
-        def sortFunc(e):
+        def sort_func(e):
             return len(e['items'])
 
         if request.GET.get('sortOption'):
@@ -176,11 +169,11 @@ class SortedListsListView(APIView):
             if sort_option == 1:
                 db_lists = ListModel.objects.filter(user_id=pk)
                 lists = ListSerializer(db_lists, many=True).data
-                lists.sort(reverse=True, key=sortFunc)
+                lists.sort(reverse=True, key=sort_func)
             elif sort_option == 0:
                 db_lists = ListModel.objects.filter(user_id=pk)
                 lists = ListSerializer(db_lists, many=True).data
-                lists.sort(reverse=False, key=sortFunc)
+                lists.sort(reverse=False, key=sort_func)
 
         return Response(lists[step*page:step*(page+1)], status.HTTP_200_OK)
 

@@ -26,7 +26,6 @@ class ListSerializer(ModelSerializer):
             ListItemModel.objects.create(list=list, **item_data)
         return list
 
-
     def update(self, instance, validated_data):
         items_data = validated_data.pop('items')
         for item_data in items_data:
