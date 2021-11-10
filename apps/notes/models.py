@@ -9,6 +9,6 @@ class NoteModel(models.Model):
         db_table = 'note'
 
     title = models.CharField(max_length=100)
-    content = models.CharField(max_length=500)
+    content = models.TextField()
     user = models.ForeignKey(to=UserModel, on_delete=models.CASCADE)
 
