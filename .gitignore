@@ -19,3 +19,8 @@ apps/lists/migrations/0002_initial.py
 
 
 
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
