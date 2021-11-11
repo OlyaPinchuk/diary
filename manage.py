@@ -8,9 +8,7 @@ import dotenv
 
 
 def main():
-    print(os.environ.get('SECRET_KEY'))
-    dotenv.read_dotenv(os.path.join(Path(__file__).resolve().parent), '.env')
-    print(os.environ.get('SECRET_KEY'))
+    # dotenv.read_dotenv(os.path.join(Path(__file__).resolve().parent), '.env')
     """Run administrative tasks."""
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'MAIN_APP.settings')
     try:
