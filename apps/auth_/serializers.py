@@ -25,7 +25,7 @@ class RegisterSerializer(ModelSerializer):
         token = Utils.create_email_token(user)
         data = {
             'subject': 'Activate account',
-            'body': f'http://localhost:4200/auth/activate?token={token}',
+            'body': f'http://django-env.eba-tfm4buue.us-west-2.elasticbeanstalk.com/api/v1/auth_/activate?token={token}',
             'to': [user.email]
         }
         Utils.send_email(**data)
