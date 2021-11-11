@@ -4,10 +4,8 @@ django-cors-headers==3.7.0
 django-dotenv==1.4.2
 djangorestframework==3.12.4
 djangorestframework-simplejwt==4.7.2
-mysqlclient
+mysqlclient==2.0.3
 Pillow==8.3.1
 PyJWT==2.1.0
 pytz==2021.1
 sqlparse==0.4.1
-python3-dev
-libmysqlclient-Dev2install
