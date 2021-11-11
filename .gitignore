@@ -6,17 +6,11 @@ configs/__pycache__/jwt_config.cpython-38.pyc
 configs/__pycache__/rest_config.cpython-38.pyc
 apps/notes/__pycache__/
 apps/notes/migrations/__pycache__/
-apps/notes/migrations/0001_initial.py
-apps/notes/migrations/0002_notemodel_user.py
-apps/user_profile/migrations/0001_initial.py
-apps/user_profile/migrations/0002_profilemodel_user.py
-apps/users/migrations/0001_initial.py
 apps/lists/__init__.py
 apps/lists/__pycache__/
-apps/lists/migrations/0001_initial.py
 apps/lists/migrations/__pycache__/0002_initial.cpython-38.pyc
-apps/lists/migrations/0002_initial.py
 
+__pycache__
 
 
 
