@@ -10,7 +10,13 @@ apps/lists/__init__.py
 apps/lists/__pycache__/
 apps/lists/migrations/__pycache__/0002_initial.cpython-38.pyc
 
+
 __pycache__
+
+images/test0@mailinator.com
+images/user1@gmail.com
+images/user2@gmail.com
+images/user15@mailinator.com
 
 
 
@@ -18,3 +24,5 @@ __pycache__
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
+
+
