@@ -51,4 +51,5 @@ class UserUpdateProfileView(UpdateAPIView):
     def get_object(self):
         pk = self.kwargs.get('pk')
         user = get_object_or_404(UserModel, pk=pk)
+        print(user.profile.avatar)
         return user.profile

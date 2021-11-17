@@ -7,7 +7,7 @@ urlpatterns = [
     path('', NoteListView.as_view()),
     path('/add', NoteCreate.as_view()),
     path('/<int:id>', ChosenNote.as_view()),
-    path('/<int:id>/edit', ChosenNote.as_view()),
-    path('/<int:id>/delete', ChosenNote.as_view()),
+    # path('/<int:id>/edit', ChosenNote.as_view()),
+    # path('/<int:id>/delete', ChosenNote.as_view()),
     path('/search', FoundNotesListView.as_view()),
 ]
