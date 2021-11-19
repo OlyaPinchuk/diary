@@ -113,6 +113,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+#  for instance run
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
