@@ -17,7 +17,6 @@ from configs import *
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
@@ -29,7 +28,6 @@ DEBUG = bool(os.environ.get('DEBUG'))
 
 ALLOWED_HOSTS = ['*']
 CORS_ALLOW_ALL_ORIGINS = True
-
 
 # Application definition
 AUTH_USER_MODEL = 'users.CustomUser'
@@ -83,7 +81,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'MAIN_APP.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
@@ -97,7 +94,6 @@ DATABASES = {
         'PORT': '3306'
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -117,6 +113,24 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {
+        "verbose": {"format": "%(asctime)s %(levelname)s %(module)s: %(message)s"}
+    },
+    "handlers": {
+        "app": {
+            "level": "DEBUG",
+            "class": "logging.FileHandler",
+            "filename": "/var/log/app.log",
+            "formatter": "verbose",
+        }
+    },
+    "loggers": {
+        "app": {"handlers": ["app"], "level": "DEBUG", "propagate": True}
+    },
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
@@ -131,7 +145,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
@@ -145,7 +158,6 @@ STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 # MEDIA_ROOT = os.path.join(BASE_DIR, 'images')
 APPEND_SLASH = False
-
 
 AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
