@@ -120,15 +120,15 @@ LOGGING = {
         "verbose": {"format": "%(asctime)s %(levelname)s %(module)s: %(message)s"}
     },
     "handlers": {
-        "app": {
+        "file": {
             "level": "DEBUG",
             "class": "logging.FileHandler",
-            "filename": "/var/app/current/app.log",
+            "filename": "/var/log/app-logs/app.log",
             "formatter": "verbose",
         }
     },
     "loggers": {
-        "app": {"handlers": ["app"], "level": "DEBUG", "propagate": True}
+        "django": {"handlers": ["file"], "level": "DEBUG", "propagate": True}
     },
 }
 

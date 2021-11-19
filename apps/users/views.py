@@ -1,3 +1,5 @@
+import logging
+
 from rest_framework import status
 from rest_framework.generics import ListAPIView, GenericAPIView, UpdateAPIView, get_object_or_404
 from django.contrib.auth import get_user_model
@@ -10,6 +12,7 @@ from rest_framework.permissions import IsAdminUser, IsAuthenticated
 
 UserModel = get_user_model()
 
+logger = logging.getLogger(__name__)
 
 class UserListView(ListAPIView):
     permission_classes = [IsAdminUser]
@@ -20,6 +23,7 @@ class UserListView(ListAPIView):
 class ChosenUserView(APIView):
 
     def get(self, *args, **kwargs):
+        logger.info('Hello world')
         pk = kwargs.get('pk')
         user = get_object_or_404(UserModel.objects.all(), pk=pk)
         data = UserDetailSerializer(user).data
