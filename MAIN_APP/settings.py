@@ -123,7 +123,7 @@ LOGGING = {
         "app": {
             "level": "DEBUG",
             "class": "logging.FileHandler",
-            "filename": "/var/log/app.log",
+            "filename": "/var/app/current/app.log",
             "formatter": "verbose",
         }
     },
