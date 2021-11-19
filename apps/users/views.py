@@ -12,7 +12,7 @@ from rest_framework.permissions import IsAdminUser, IsAuthenticated
 
 UserModel = get_user_model()
 
-logger = logging.getLogger(__name__)
+logger = logging.getLogger('django')
 
 class UserListView(ListAPIView):
     permission_classes = [IsAdminUser]
