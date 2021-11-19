@@ -11,6 +11,7 @@ django-cors-headers = "*"
 pillow = "*"
 django-dotenv = "*"
 mysqlclient = "*"
+django-s3direct = "*"
 
 [dev-packages]
 
